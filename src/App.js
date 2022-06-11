@@ -2,6 +2,7 @@ import './App.css';
 import React, { useState } from 'react';
 import MainSizeSelector from './components/MainSizeSelector';
 import UberdachungSelector from './components/ÜberdachungSelector';
+import CustomSelector from './components/CustomSelector';
 
 function App() {
   const [test,setTest] = useState(1)
@@ -10,12 +11,17 @@ function App() {
   setTest(test + 1)
   }
 
+  const uberdachungen = [
+    'Polycarbon',
+    'Glas',
+    'Milchglas',
+  ];
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <MainSizeSelector />
-        <UberdachungSelector />
-      </header>
+    <div>
+      <div className="Main-Container">
+      <CustomSelector value={uberdachungen} title='Test' />
+      </div>
     </div>
   );
 }

@@ -19,13 +19,7 @@ const MenuProps = {
   },
 };
 
-const uberdachungen = [
-  'Polycarbon',
-  'Glas',
-  'Milchglas',
-];
-
-export default function UberdachungSelector() {
+export default function CustomSelector(props) {
   const [personName, setPersonName] = React.useState([]);
 
   const handleChange = (event) => {
@@ -39,21 +33,18 @@ export default function UberdachungSelector() {
   };
 
   return (
-    <div>
-        <h3 style={TitleStyle}>Überdachung</h3> 
+    <div className='selectorContainer'>
+        <h3 className='selectorContainer' style={TitleStyle}>{props.title}</h3> 
 
       <FormControl sx={{ m: 1, width: 300}}>
         <Select
-          labelId="demo-multiple-checkbox-label"
-          id="demo-multiple-checkbox"
           value={personName}
           onChange={handleChange}
-          input={<OutlinedInput label="Tag" />}
           renderValue={(selected) => selected.join(', ')}
           MenuProps={MenuProps}
           autoWidth
         >
-          {uberdachungen.map((name) => (
+          {props.value.map((name) => (
             <MenuItem key={name} value={name}>
               <Checkbox checked={personName.indexOf(name) > -1} />
               <ListItemText primary={name} />
