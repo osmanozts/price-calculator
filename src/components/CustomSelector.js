@@ -1,6 +1,4 @@
 import * as React from 'react';
-import OutlinedInput from '@mui/material/OutlinedInput';
-import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import ListItemText from '@mui/material/ListItemText';
@@ -34,7 +32,7 @@ export default function CustomSelector(props) {
 
   return (
     <div className='selectorContainer'>
-        <h3 className='selectorContainer' style={TitleStyle}>{props.title}</h3> 
+        <h3 className='selectorContainer'>{props.title}</h3> 
 
       <FormControl sx={{ m: 1, width: 300}}>
         <Select
@@ -43,6 +41,7 @@ export default function CustomSelector(props) {
           renderValue={(selected) => selected.join(', ')}
           MenuProps={MenuProps}
           autoWidth
+          defaultValue={""}
         >
           {props.value.map((name) => (
             <MenuItem key={name} value={name}>
