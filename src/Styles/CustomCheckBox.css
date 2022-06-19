@@ -1,0 +1,12 @@
+.CheckBoxContainer {
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: row;
+    padding: 16px;
+    width: 350px;
+}
+
+.checkBoxTitle {
+    color: #636E7E;
+    font-weight: bold;
+}
