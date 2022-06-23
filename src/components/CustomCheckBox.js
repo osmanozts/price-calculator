@@ -7,13 +7,12 @@ export default function CustomCheckBox(props) {
     const onPress = (value) => {
         if (callback) {
             callback(value)
-            console.log(value)
         } else { console.log("no callback defined") }
     }
 
     return (
         <div className='CheckBoxContainer'>
-            <Checkbox color='success' onChange={(temp) => { onPress(temp) }} checked={checked ?? false} />
+            <Checkbox color='success' onChange={(temp) => { onPress(temp) }} checked={checked ?? false} disableRipple />
             <p className='checkBoxTitle'>{label}</p>
         </div>
     );

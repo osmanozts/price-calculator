@@ -6,13 +6,14 @@ import Select from '@mui/material/Select';
 import Checkbox from '@mui/material/Checkbox';
 import { useState } from 'react';
 import '../Styles/Selector.css'
+import { useEffect } from 'react';
 
 const ITEM_HEIGHT = 48;
 const ITEM_PADDING_TOP = 8;
 const MenuProps = {
   PaperProps: {
     style: {
-      maxHeight: ITEM_HEIGHT * 4.5 + ITEM_PADDING_TOP,
+      maxHeight: ITEM_HEIGHT * 6.5 + ITEM_PADDING_TOP,
       width: 250,
     },
   },
@@ -21,9 +22,14 @@ const MenuProps = {
 
 
 export default function CustomSelector(props) {
-  const { title, array, callback } = props;
+  const { title, array, callback, defaultValue } = props;
 
-  const [value, setValue] = useState([]);
+  const [value, setValue] = useState([defaultValue ?? null]);
+
+  useEffect(() => {
+    setValue([defaultValue] ?? null);
+  }, [defaultValue])
+
 
   const handleChange = (event) => {
     const { target: { value }, } = event;

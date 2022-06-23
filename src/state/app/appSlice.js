@@ -7,6 +7,7 @@ const initialState = {
   selectedWidth: 'N/V',
   selectedDepth: 'N/V',
   selectedTop: 'N/V',
+  isWintergarten: false,
   dimensions: [
     { width: '3.00', depth: '2.50', price: 1900 },
     { width: '3.00', depth: '3.00', price: 2100 },
@@ -47,7 +48,7 @@ const initialState = {
 
 /**
 * Creates Selector to use in components
-* rerenders only if state.events.items has changed
+* rerenders only if state items has changed
 * https://redux.js.org/usage/deriving-data-selectors
 *
 */
@@ -65,6 +66,10 @@ export const getTop = createSelector(
   selectApp,
   (state) => state.selectedTop)
 
+export const isWintergarten = createSelector(
+  selectApp,
+  (state) => state.isWintergarten)
+
 export const selectPrice = createSelector(
   selectApp,
   (state) => {
@@ -75,6 +80,7 @@ export const selectPrice = createSelector(
     return selectedDimension[0]?.price ?? 0;
   }
 )
+
 export const selectPriceForTop = createSelector(
   selectApp,
   (state) => {
@@ -94,6 +100,36 @@ export const selectPriceForTop = createSelector(
 )
 
 
+
+export const selectPriceForDoors = createSelector(
+  selectApp,
+  (state) => {
+    if (!state.isWintergarten) return 0;
+
+    else {
+      const diameter = parseFloat(state.selectedDepth) + parseFloat(state.selectedDepth) + parseFloat(state.selectedWidth);
+      return diameter * 350;
+    }
+  }
+)
+
+export const selectPriceForSeitenKeile = createSelector(
+  selectApp,
+  (state) => {
+    if (!state.isWintergarten) return 0;
+
+    else {
+      if (state.selectedTop === 'Glas') return 1000;
+      else {
+        const seitenLaenge = parseFloat(state.selectedDepth) + parseFloat(state.selectedDepth);
+        return seitenLaenge * 100;
+      }
+
+    }
+  }
+)
+
+
 export const appSlice = createSlice({
   name: 'app',
   initialState,
@@ -107,6 +143,9 @@ export const appSlice = createSlice({
     SET_SELECTED_TOP: (state, action) => {
       state.selectedTop = action.payload;
     },
+    TOGGLE_IS_WINTERGARTEN: (state, action) => {
+      state.isWintergarten = !state.isWintergarten;
+    }
   },
   // extraReducers handle the async state changes during promise handling
   // extraReducers(builder) {
@@ -116,6 +155,6 @@ export const appSlice = createSlice({
 
 // DON'T FORGET: add new Reducer here to export.
 // Action creators are generated for each case reducer function
-export const { SET_SELECTED_WIDTH, SET_SELECTED_DEPTH, SET_SELECTED_TOP } = appSlice.actions;
+export const { SET_SELECTED_WIDTH, SET_SELECTED_DEPTH, SET_SELECTED_TOP, TOGGLE_IS_WINTERGARTEN } = appSlice.actions;
 
 export default appSlice.reducer;
