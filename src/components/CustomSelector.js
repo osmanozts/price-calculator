@@ -43,7 +43,7 @@ export default function CustomSelector(props) {
     <div className='selectorContainer'>
       <h4 className='selectorTitle'>{title}</h4>
 
-      <FormControl sx={{ m: 1, width: 300 }}>
+      <FormControl sx={{ m: 1, width: 300 }} size="small">
         <Select
           value={value}
           onChange={handleChange}
